@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Arte</title>
+    <style>
+        :root {
+            --mimi-pink: #ffd6ffff;
+            --mauve: #e7c6ffff;
+            --mauve-2: #c8b6ffff;
+            --periwinkle: #b8c0ffff;
+            --periwinkle-2: #bbd0ffff;
+            --blue-electric: #00faff; /* Color azul eléctrico */
+        }
+
+        body { font-family: Arial, sans-serif; background: var(--blue-electric); } /* Cambio de color de fondo */
+        .navbar { display: flex; justify-content: space-around; padding: 1rem; background-color: var(--mauve); }
+        .navbar a { color: var(--mimi-pink); text-decoration: none; }
+        .container { padding: 2rem; display: none; }
+        .gallery { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .gallery img { width: 100%; max-width: 300px; }
+        .contact-form { display: flex; flex-direction: column; gap: 1rem; max-width: 300px; }
+        .contact-form input, .contact-form textarea { padding: 0.5rem; }
+        .contact-form button { padding: 0.5rem; background-color: var(--mauve-2); color: var(--periwinkle-2); border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="#inicio">Inicio</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+</nav>
+
+<section id="inicio" class="container" style="display: block;">
+    <h1>Bienvenidos a la Galería de Arte</h1>
+    <p>¡Bienvenido a nuestra galería de arte! Sumérgete en un viaje visual que fusiona lo clásico con lo contemporáneo. Descubre la creatividad y la expresión a través de una variedad de obras cautivadoras. ¡Déjate inspirar y maravillar por la belleza del arte en todas sus formas!</p>
+</section>
+
+<section id="galeria" class="container">
+    <h2>Galería de Fotos</h2>
+    <div class="gallery">
+        <img src="arte1.jpg" alt="Obra de arte número 1">
+        <img src="arte2.jpg" alt="Obra de arte número 2">
+        <img src="arte3.jpg" alt="Obra de arte número 3">
+        <img src="arte4.jpg" alt="Obra de arte número 4">
+        <img src="arte5.jpg" alt="Obra de arte número 5">
+        <img src="arte6.jpg" alt="Obra de arte número 6">
+    </div>
+</section>
+
+<section id="contacto" class="container">
+    <h2>Contacto</h2>
+    <form class="contact-form">
+        <input type="text" placeholder="Nombre completo" required>
+        <input type="email" placeholder="Correo electrónico" required>
+        <textarea placeholder="Tu mensaje" required></textarea>
+        <button type="submit">Enviar Mensaje</button>
+    </form>
+</section>
+
+<script>
+    const navLinks = document.querySelectorAll('.navbar a');
+    const sections = document.querySelectorAll('section');
+
+    function hideSections() {
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+    }
+
+    function showSection(hash) {
+        const section = document.querySelector(hash);
+        if (section) {
+            hideSections();
+            section.style.display = 'block';
+        }
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const hash = link.getAttribute('href');
+            showSection(hash);
+            history.pushState(null, null, hash);
+        });
+    });
+
+    hideSections();
+    showSection('#inicio');
+
+    window.addEventListener('load', () => {
+        if (window.location.hash) {
+            showSection(window.location.hash);
+        }
+    });
+</script>
+
+</body>
+</html>
